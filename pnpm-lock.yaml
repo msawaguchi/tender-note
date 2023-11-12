@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  dom-to-image:
+    specifier: ^2.6.0
+    version: 2.6.0
+  html2canvas:
+    specifier: ^1.4.1
+    version: 1.4.1
   konva:
     specifier: ^9.2.3
     version: 9.2.3
@@ -1437,6 +1443,10 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dom-to-image@2.6.0:
+    resolution: {integrity: sha512-Dt0QdaHmLpjURjU7Tnu3AgYSF2LuOmksSGsUcE6ItvJoCWTBEmiMXcqBdNSAm9+QbbwD7JMoVsuuKX6ZVQv1qA==}
+    dev: false
 
   /dompurify@2.4.7:
     resolution: {integrity: sha512-kxxKlPEDa6Nc5WJi+qRgPbOAbgTpSULL+vI3NUXsZMlkJxTqYI9wg5ZTay2sFrdZRWHPWNi+EdAhcJf81WtoMQ==}

@@ -1,6 +1,7 @@
+import { useRef } from 'react'
 import { HomeContainer, LetterPaper } from './styles'
+import exportAsImage from '../../utils/exportAsImage'
 import { Stage, Layer, Image } from 'react-konva'
-import { exportComponentAsPNG } from 'react-component-export-image'
 import useImage from 'use-image'
 
 import g1 from '../../assets/green1.webp'
@@ -9,7 +10,6 @@ import g3 from '../../assets/green3.webp'
 import g4 from '../../assets/green4.webp'
 import g5 from '../../assets/green5.webp'
 import g6 from '../../assets/green6.webp'
-import { useState, useRef } from 'react'
 
 const greenStickers = [g1, g2, g3, g4, g5, g6]
 
@@ -32,32 +32,34 @@ export function ImgSrc(imgUrl: string) {
 }
 
 export function Home() {
-  const [stickers, setStickers] = useState(INITIAL_STICKERS)
+  const stickers = INITIAL_STICKERS
+
   const shapeRef = useRef(null)
-  const componentRef = useRef(null)
+
+  function handleSaveLetter() {
+    exportAsImage('the_canvas_element_id')
+  }
 
   return (
-    <HomeContainer ref={componentRef}>
+    <HomeContainer id="the_canvas_element_id">
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
           {stickers.map((sticker) => (
-            <>
-              <Image
-                ref={shapeRef}
-                key={sticker.id}
-                id={sticker.id}
-                x={sticker.x}
-                y={sticker.y}
-                src={sticker.image}
-                rotation={sticker.rotation}
-                draggable
-                onDragStart={() => {
-                  sticker.isDragging = true
-                }}
-                alt=""
-                image={ImgSrc(sticker.image)}
-              />
-            </>
+            <Image
+              ref={shapeRef}
+              key={sticker.id}
+              id={sticker.id}
+              x={sticker.x}
+              y={sticker.y}
+              src={sticker.image}
+              rotation={sticker.rotation}
+              draggable
+              onDragStart={() => {
+                sticker.isDragging = true
+              }}
+              alt=""
+              image={ImgSrc(sticker.image)}
+            />
           ))}
         </Layer>
       </Stage>
@@ -68,7 +70,7 @@ export function Home() {
         </div>
         <div className="tape-section"></div>
       </LetterPaper>
-      <h2 onClick={() => exportComponentAsPNG(componentRef)}>save</h2>
+      <h2 onClick={handleSaveLetter}>save</h2>
     </HomeContainer>
   )
 }
